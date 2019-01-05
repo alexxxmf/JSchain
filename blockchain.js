@@ -13,6 +13,7 @@ class Blockchain{
         })
         this.chain.push(newBlock);
     }
+
     static isValidChain(chain) {
         if (JSON.stringify(chain[0]) !== JSON.stringify(Block.genesis())) {
             return false;
@@ -36,6 +37,13 @@ class Blockchain{
 
         return true;
     }
+
+    replaceChain(blockchain) {
+        if (this.chain.length < blockchain.chain.length) {
+            this.chain = blockchain.chain
+        }
+    }
+
 };
 
 module.exports = Blockchain;

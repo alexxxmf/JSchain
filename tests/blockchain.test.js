@@ -39,4 +39,23 @@ describe('Blockchain', () => {
         });
     });
 
+    describe('replaceChain()', () => {
+        beforeEach(() => {
+            this.newBlockchain = new Blockchain();
+        })
+
+        it('Should not replace the current chain if the incoming one is not longer', () => {
+            this.blockchain.replaceChain(this.newBlockchain);
+            this.blockchain.addBlock({transactions: ['transaction01xx']});
+            expect(this.blockchain.chain).not.toEqual(this.newBlockchain.chain)
+        })
+
+        it('Should replace the current chain if the incoming one is longer', () => {
+            this.newBlockchain.addBlock({transactions: ['001']})
+            this.newBlockchain.addBlock({transactions: ['002']})
+            this.blockchain.replaceChain(this.newBlockchain);
+            expect(this.blockchain.chain).toEqual(this.newBlockchain.chain)
+        })
+    })
+
 });
