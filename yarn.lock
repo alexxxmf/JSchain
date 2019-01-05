@@ -551,10 +551,6 @@ cross-spawn@^5.0.1:
     shebang-command "^1.2.0"
     which "^1.2.9"
 
-crypto-hash@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/crypto-hash/-/crypto-hash-1.0.0.tgz#cb141377ceb1606c3737086e59bbc4921a3c3358"
-
 cssom@0.3.x, "cssom@>= 0.3.2 < 0.4.0":
   version "0.3.4"
   resolved "https://registry.yarnpkg.com/cssom/-/cssom-0.3.4.tgz#8cd52e8a3acfd68d3aed38ee0a640177d2f9d797"

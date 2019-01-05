@@ -1,4 +1,5 @@
 const Block = require('../block.js');
+const { hashSHA256 } = require('../utils.js');
 
 const { GENESIS_DATA } = require('../config.js');
 
@@ -25,5 +26,21 @@ describe('Block', () => {
         expect(genesisBlock instanceof Block).toBe(true);
         
         expect(genesisBlock).toEqual(GENESIS_DATA)
-    })
+    });
+
+    it('Should mine a block given a last block and some transactions', () => {
+        const lastBlock = Block.genesis();
+        const transactions = ['transaction01']
+ 
+        const minedBlock = Block.mineBlock({lastBlock, transactions});
+
+        expect(minedBlock instanceof Block).toBe(true);
+
+        expect(minedBlock.transactions).toEqual(transactions);
+
+        expect(minedBlock.timestamp).not.toEqual(undefined);
+        
+    });
+
+
 });

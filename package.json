@@ -6,7 +6,6 @@
   "author": "Alejandro Moro Fernandez <alejandro.moro-fernandez@freeformers.com>",
   "license": "MIT",
   "dependencies": {
-    "crypto-hash": "^1.0.0",
     "jest": "^23.6.0"
   },
   "scripts": {
