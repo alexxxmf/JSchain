@@ -1,0 +1,15 @@
+{
+  "name": "JSchain",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:alexxxmf/JSchain.git",
+  "author": "Alejandro Moro Fernandez <alejandro.moro-fernandez@freeformers.com>",
+  "license": "MIT",
+  "dependencies": {
+    "crypto-hash": "^1.0.0",
+    "jest": "^23.6.0"
+  },
+  "scripts": {
+    "jest": "jest --watchAll"
+  }
+}
