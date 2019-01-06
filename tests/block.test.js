@@ -52,7 +52,16 @@ describe('Block', () => {
 
         expect(minedBlock.timestamp).not.toEqual(undefined);
         
+        expect(minedBlock.hash).toEqual(hashSHA256({
+
+        }))
     });
-
-
 });
+
+/*
+    TODO:
+
+    Adding more tests to check that the difference between continuous blocks in
+    terms of difficulty is 1.
+
+*/

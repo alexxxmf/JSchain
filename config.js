@@ -1,4 +1,4 @@
-const DIFFICULTY = 3;
+const DIFFICULTY = 1;
 
 const GENESIS_DATA = {
     nonce: 0,

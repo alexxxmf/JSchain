@@ -1,4 +1,4 @@
-const { GENESIS_DATA, MINE_RATE } = require('./config');
+const { GENESIS_DATA, MINING_RATE } = require('./config');
 const { hashSHA256 } = require('./utils.js');
 
 class Block{
@@ -53,8 +53,7 @@ class Block{
             difficulty = 1;
         }
         const difference = timestamp - originalBlock.timestamp;
-
-        if (difference > MINE_RATE) {
+        if (difference > MINING_RATE) {
             return difficulty - 1;
         }
 
