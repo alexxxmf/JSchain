@@ -11,13 +11,25 @@ describe('Block', () => {
         const prevBlockHash = 'x0123';
         const transactions = ['transaction01', 'transaction02'];
         const hash = 'x0abc';
+        const nonce = 1;
+        const difficulty = 1;
 
-        const block = new Block({prevBlockHash, transactions, timestamp, hash});
+        const block = new Block({
+            prevBlockHash,
+            transactions,
+            timestamp,
+            hash,
+            nonce,
+            difficulty
+        });
 
         expect(block.prevBlockHash).toEqual(prevBlockHash);
         expect(block.transactions).toEqual(transactions);
         expect(block.timestamp).toEqual(timestamp);
         expect(block.hash).toEqual(hash);
+        expect(block.nonce).toEqual(nonce);
+        expect(block.difficulty).toEqual(difficulty);
+
     });
 
     it('Should create a genesis block', () => {

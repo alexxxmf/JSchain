@@ -1,13 +1,14 @@
-const { GENESIS_DATA } = require('./config');
+const { GENESIS_DATA, MINE_RATE } = require('./config');
 const { hashSHA256 } = require('./utils.js');
 
 class Block{
-    constructor({prevBlockHash, transactions, timestamp, hash}){
-        this.nonce = 0;
+    constructor({prevBlockHash, transactions, timestamp, hash, difficulty, nonce}){
         this.prevBlockHash = prevBlockHash;
         this.transactions = transactions;
         this.timestamp = timestamp;
         this.hash = hash;
+        this.difficulty = difficulty;
+        this.nonce = nonce;
     }
 
     static genesis() {
@@ -15,16 +16,49 @@ class Block{
     }
 
     static mineBlock({lastBlock, transactions}) {
-        const timestamp = Date.now();
         const prevBlockHash = lastBlock.hash;
-        const hash = hashSHA256(prevBlockHash, transactions, timestamp)
+        let nonce = 0;
+        let hash, timestamp;
+        let { difficulty } = lastBlock;
+
+        do {
+            timestamp = Date.now();
+            nonce += 1;
+            difficulty = Block.adjustDifficulty({
+                originalBlock: lastBlock,
+                timestamp
+            });
+            hash = hashSHA256(
+                prevBlockHash,
+                transactions,
+                timestamp,
+                nonce,
+                difficulty
+            );
+        } while(hash.substring(0, difficulty) !== '0'.repeat(difficulty));
 
         return new this({
             prevBlockHash,
             transactions,
             timestamp,
-            hash
+            hash,
+            difficulty,
+            nonce
         });
+    }
+
+    static adjustDifficulty({ originalBlock, timestamp}) {
+        const { difficulty } = originalBlock;
+        if (difficulty < 1) {
+            difficulty = 1;
+        }
+        const difference = timestamp - originalBlock.timestamp;
+
+        if (difference > MINE_RATE) {
+            return difficulty - 1;
+        }
+
+        return difficulty + 1;
     }
 }
 

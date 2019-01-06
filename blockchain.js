@@ -24,13 +24,13 @@ class Blockchain{
 
             const hashFromPrevBlock = chain[i - 1].hash;
 
-            const { timestamp, prevBlockHash, hash, transactions } = block;
+            const { timestamp, prevBlockHash, hash, transactions, nonce, difficulty } = block;
 
             if (prevBlockHash !== hashFromPrevBlock) {
                 return false;
             }
 
-            if (hashSHA256(prevBlockHash, transactions, timestamp) !== block.hash) {
+            if (hashSHA256(prevBlockHash, transactions, timestamp, nonce, difficulty) !== block.hash) {
                 return false;
             }
         }

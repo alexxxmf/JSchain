@@ -30,10 +30,8 @@ describe('Blockchain', () => {
 
         it('Should check that blocks have the right content', () => {
             this.blockchain.addBlock({transactions: ['transaction01xx']});
-            this.blockchain.addBlock({transactions: ['transaction02xx']});
-            this.blockchain.addBlock({transactions: ['transaction03xx']});
             expect(Blockchain.isValidChain(this.blockchain.chain)).toBe(true);
-            this.blockchain.chain[2].transactions = ['malicious transaction 01'];
+            this.blockchain.chain[1].transactions = ['malicious transaction 01'];
             expect(Blockchain.isValidChain(this.blockchain.chain)).toBe(false);
 
         });
