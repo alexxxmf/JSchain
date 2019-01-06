@@ -26,6 +26,15 @@ describe('Blockchain', () => {
     describe('isValidChain()', () => {
         it('Should check that genesis block is the first element in the chain', () => {
             expect(Blockchain.isValidChain(this.blockchain.chain)).toBe(true);
+            this.blockchain.chain[0] = {
+                nonce: 0,
+                difficulty: 2,
+                prevBlockHash: 'ahhhhh',
+                transactions: [],
+                timestamp: Date.now(),
+                hash: '1111'
+            }
+            expect(Blockchain.isValidChain(this.blockchain.chain)).toBe(false);
         });
 
         it('Should check that blocks have the right content', () => {
@@ -33,8 +42,19 @@ describe('Blockchain', () => {
             expect(Blockchain.isValidChain(this.blockchain.chain)).toBe(true);
             this.blockchain.chain[1].transactions = ['malicious transaction 01'];
             expect(Blockchain.isValidChain(this.blockchain.chain)).toBe(false);
-
         });
+
+        it('Should check that blocks previousBlockHash matches previous block hash if chain is valid', () => {
+            this.blockchain.addBlock({transactions: ['transaction01xx']});
+            this.blockchain.chain[1].prevBlockHash = "aaa"
+            expect(Blockchain.isValidChain(this.blockchain.chain)).toBe(false);
+        });
+        
+        it('Should check that a block difficulty could not exceed 1 from previous block', () => {
+            this.blockchain.addBlock({transactions: ['transaction01xx']});
+            this.blockchain.chain[1].difficulty = 1;
+            expect(Blockchain.isValidChain(this.blockchain.chain)).toBe(false);
+        })
     });
 
     describe('replaceChain()', () => {
