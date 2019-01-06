@@ -51,17 +51,21 @@ describe('Block', () => {
         expect(minedBlock.transactions).toEqual(transactions);
 
         expect(minedBlock.timestamp).not.toEqual(undefined);
-        
-        expect(minedBlock.hash).toEqual(hashSHA256({
 
-        }))
+        expect(minedBlock.hash).toEqual(hashSHA256(
+            minedBlock.prevBlockHash,
+            minedBlock.transactions,
+            minedBlock.timestamp,
+            minedBlock.nonce,
+            minedBlock.difficulty,
+        ))
     });
 });
 
 /*
     TODO:
 
-    Adding more tests to check that the difference between continuous blocks in
-    terms of difficulty is 1.
+    Adding more tests to check that the increment between continuous blocks in
+    terms of difficulty is [-1,]
 
 */

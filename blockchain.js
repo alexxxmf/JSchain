@@ -26,6 +26,8 @@ class Blockchain{
 
             const { timestamp, prevBlockHash, hash, transactions, nonce, difficulty } = block;
 
+            const lastDifficulty = chain[i - 1].difficulty;
+
             if (prevBlockHash !== hashFromPrevBlock) {
                 return false;
             }
@@ -33,6 +35,10 @@ class Blockchain{
             if (hashSHA256(prevBlockHash, transactions, timestamp, nonce, difficulty) !== block.hash) {
                 return false;
             }
+
+            if (Math.abs(lastDifficulty - difficulty) > 1) {
+                return false;
+            } 
         }
 
         return true;
