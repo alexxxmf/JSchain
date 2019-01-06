@@ -1,4 +1,4 @@
-const DIFFICULTY = 1;
+const DIFFICULTY = 5;
 
 const GENESIS_DATA = {
     nonce: 0,
@@ -9,7 +9,7 @@ const GENESIS_DATA = {
     hash: '0x01'
 }
 
-const MINING_RATE = 1000; //miliseconds
+const MINING_RATE = 2500; //miliseconds
 
 
 module.exports = { GENESIS_DATA, MINING_RATE, DIFFICULTY };

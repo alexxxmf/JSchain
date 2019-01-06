@@ -1,5 +1,6 @@
 const { GENESIS_DATA, MINING_RATE } = require('./config');
 const { hashSHA256 } = require('./utils.js');
+const hexToBinary = require('hex-to-binary');
 
 class Block{
     constructor({prevBlockHash, transactions, timestamp, hash, difficulty, nonce}){
@@ -18,7 +19,7 @@ class Block{
     static mineBlock({lastBlock, transactions}) {
         const prevBlockHash = lastBlock.hash;
         let nonce = 0;
-        let hash, timestamp;
+        let hash, timestamp, binaryHash;
         let { difficulty } = lastBlock;
 
         do {
@@ -35,7 +36,7 @@ class Block{
                 nonce,
                 difficulty
             );
-        } while(hash.substring(0, difficulty) !== '0'.repeat(difficulty));
+        } while(hexToBinary(hash).substring(0, difficulty) !== '0'.repeat(difficulty));
 
         return new this({
             prevBlockHash,
@@ -48,7 +49,7 @@ class Block{
     }
 
     static adjustDifficulty({ originalBlock, timestamp}) {
-        const { difficulty } = originalBlock;
+        let { difficulty } = originalBlock;
         if (difficulty < 1) {
             difficulty = 1;
         }

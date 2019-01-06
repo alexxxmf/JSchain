@@ -18,9 +18,6 @@ for (let i=0; i<1000; i++) {
     //averageTime = times.reduce((total, num) => (total + num)); 
 
     console.log(
-        `
-        Time spent mining block: ${timeDifference}ms.
-        Difficulty: ${currentBlock.difficulty}.
-        `
+        `Time spent mining block: ${timeDifference}ms. Difficulty: ${currentBlock.difficulty}.`
     )
 }
