@@ -45,7 +45,7 @@ class Blockchain{
     }
 
     replaceChain(blockchain) {
-        if (this.chain.length < blockchain.chain.length) {
+        if (this.chain.length < blockchain.length) {
             this.chain = blockchain.chain
         }
     }

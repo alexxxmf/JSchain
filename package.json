@@ -6,10 +6,19 @@
   "author": "Alejandro Moro Fernandez <alejandro.moro-fernandez@freeformers.com>",
   "license": "MIT",
   "dependencies": {
+    "body-parser": "^1.18.3",
+    "cross-env": "^5.2.0",
+    "express": "^4.16.4",
     "hex-to-binary": "^1.0.1",
-    "jest": "^23.6.0"
+    "jest": "^23.6.0",
+    "nodemon": "^1.18.9",
+    "request": "^2.88.0"
   },
   "scripts": {
-    "jest": "jest --watchAll"
+    "jest": "jest --watchAll",
+    "start": "node index.js",
+    "dev": "npm run start-redis && nodemon index.js",
+    "start-redis": "redis-server --daemonize yes",
+    "dev-peer": "cross-env GENERATE_PEER_PORT='true' nodemon index.js"
   }
 }
